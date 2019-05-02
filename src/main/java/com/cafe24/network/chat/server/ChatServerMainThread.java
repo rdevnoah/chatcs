@@ -18,8 +18,8 @@ public class ChatServerMainThread {
 		try {
 			serverSocket = new ServerSocket();
 			InetAddress inetAddress = InetAddress.getLocalHost();
-			String localhost = inetAddress.getHostAddress();
-			System.out.println(localhost);
+			String localhost = inetAddress.getHostAddress(); // 맥은 제대로 나옴. vm ip가 나오는 듯.
+			System.out.println(localhost); 
 			
 			//Writer Pool
 			List<Writer> listWriters = new ArrayList<Writer>();

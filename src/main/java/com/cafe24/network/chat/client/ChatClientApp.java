@@ -12,7 +12,7 @@ import com.cafe24.network.chat.server.ChatServerMainThread;
 
 public class ChatClientApp {
 	
-	public static String SERVER_IP = "192.168.1.5";
+	public static String SERVER_IP = "192.168.1.25";
 
 	public static void main(String[] args) {
 		String name = null;
