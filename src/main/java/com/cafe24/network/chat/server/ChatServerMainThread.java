@@ -17,8 +17,13 @@ public class ChatServerMainThread {
 
 		try {
 			serverSocket = new ServerSocket();
+			
+			
+			//이부분 조심한다. 리눅스에서는 현재 호스트네임을 lx01로 영구적으로 바꾸었다. 
+			//하지만 여기는 localhost라는 이름을 찾는다.
+			// # hostname localhost 로 일시적으로 변경하고 사용하자...
 			InetAddress inetAddress = InetAddress.getLocalHost();
-			String localhost = inetAddress.getHostAddress(); // 맥은 제대로 나옴. vm ip가 나오는 듯.
+			String localhost = inetAddress.getHostAddress(); // 맥은 제대로 나옴. 윈도우는 vm ip가 나오는 듯.
 			System.out.println(localhost); 
 			
 			//Writer Pool
