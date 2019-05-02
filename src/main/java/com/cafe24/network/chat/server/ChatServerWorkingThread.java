@@ -42,7 +42,7 @@ public class ChatServerWorkingThread extends Thread {
 				String request = br.readLine();
 				if (request == null) {
 					ChatServerMainThread.log("closed by Client");
-					doQuit(pw);
+					//doQuit(pw);
 					break;
 				}
 				// 프로토콜 분석
@@ -72,7 +72,7 @@ public class ChatServerWorkingThread extends Thread {
 		this.nickname = nickName;
 
 		String data = nickName + "님이 입장하셨습니다.";
-		broadcast(data);
+		broadcast("시스템", data);
 
 		// writer pool에 저장
 		addWriter(writer);
@@ -84,14 +84,16 @@ public class ChatServerWorkingThread extends Thread {
 	}
 
 	private void doMessage(String message) {
-		broadcast(message);
+		broadcast(nickname, message);
 	}
 
 	private void doQuit(Writer writer) {
 		removeWriter(writer);
-
+		PrintWriter pw = (PrintWriter)writer;
+		pw.println("quit");
 		String data = nickname + "님이 퇴장하였습니다.";
-		broadcast(data);
+
+		broadcast("시스템",data);
 	}
 
 	private void removeWriter(Writer writer) {
@@ -106,15 +108,15 @@ public class ChatServerWorkingThread extends Thread {
 		}
 	}
 
-	private void broadcast(String data) {
+	private void broadcast(String nickname,String data) {
 		synchronized (listWriters) {
 			for (Writer writer : listWriters) {
 				PrintWriter pw = (PrintWriter) writer;
-				pw.println(nickname+":"+data);
+				pw.println(nickname +":"+ data);
 				pw.flush();
 			}
 		}
-		System.out.println(nickname + ":"+ data);
+		ChatServerMainThread.log(nickname+":"+data);
 	}
 
 }

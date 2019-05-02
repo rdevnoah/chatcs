@@ -88,6 +88,7 @@ public class ChatWindow {
 	}
 	
 	private void updateTextArea(String name, String message) {
+		System.out.println(name);
 		textArea.append(name +":"+message);
 		textArea.append("\n");
 	}
@@ -116,6 +117,8 @@ public class ChatWindow {
 			while(true) {
 				try {
 					String getMessage = br.readLine();
+					
+					if ("quit".equals(getMessage))break;
 					
 					//아이디:내용 
 					String[] tokens = getMessage.split(":");
